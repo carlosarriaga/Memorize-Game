@@ -26,45 +26,11 @@ struct ContentView: View {
                     }
                 }//LazyVGrid
             }//ScrollView
-            Spacer()
-            HStack {
-                remove
-                Spacer()
-                add
-            }
-            .font(.largeTitle)
-            .padding(.horizontal)
             
         }//VStack
         .padding(.horizontal)
         .foregroundColor(.red)
     }//Body
-    
-    
-    //Buttons are created to add or subtract cards
-    var remove: some View {
-        Button {
-            //Validated not to go beyond 0
-            if emojiCount > 1 {
-                emojiCount -= 1
-            }
-        } label: {
-            Image(systemName: "minus.circle") //Apple library icon assigned
-        }
-    }
-
-    
-    var add: some View {
-        Button {
-            //Validate that it does not exceed the number of emojis in the array.
-            if emojiCount < emojis.count {
-                emojiCount += 1
-            }
-        } label: {
-            Image(systemName: "plus.circle") //Apple library icon assigned
-        }
-    }
-    
 }//ContentView
 
 
