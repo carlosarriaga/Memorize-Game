@@ -28,3 +28,10 @@ The very important concept of Views takes center stage as basic composition mech
 SwiftUI iOS app development necessitates the MVVM architecture. This lecture introduces and showcases MVVM in the Memorize app. All SwiftUI development is done in Swift, a language uniquely supportive of modern programming paradigms. The lecture covers Swift's type system basics, including structs, classes, generics, and functions as types. The Memorize app then advances to implement Model and ViewModel, utilizing generics and functions as types throughout.
 
 [Youtube - Lecture 3](https://www.youtube.com/watch?v=--qKOhdgJAs&t=1s)
+
+
+### Lecture 4: Memorize Game Logic
+
+Swift's enumeration semantics offer powerful features, allowing data storage in matching cases, creation of helper methods directly within the enumeration, pattern-matching in switch statements, and more. Many Swift libraries use the Optional enumeration, benefiting from Swift's syntax for handling Optionals. Optionals also play a role in graceful error-handling when an operation may or may not successfully return a desired value. These concepts are directly demonstrated in the final presentation of Memorize, summarizing the key features of Memorize in its functional state.
+
+[Youtube - Lecture 4](https://www.youtube.com/watch?v=oWZOFSYS5GE)
