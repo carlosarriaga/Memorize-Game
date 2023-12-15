@@ -9,25 +9,29 @@ import SwiftUI
 
 
 struct ContentView: View {
-    var emojis = ["🚀","🚁","🏎","🚒","🚗","🚕","🚌","🚓","🚑","🚐","🚜","🛵","🚙","🚎","🛻","🚚","🚛","🛸","⛵️","✈️"]
-    //@State - Declares a property that updates the view when changed.
-    @State var emojiCount = 4
+    
+    @ObservedObject var viewModel: EmojiMemoryGame
+    
     var body: some View {
-        VStack {
+        
             
             ScrollView{
                 //LazyVGrid - creates a grid that loads cells efficiently,
                 //improving performance when displaying large data sets.
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]){
                     //The cards are loaded and their respective emoji is assigned.
-                    ForEach(emojis[0..<emojiCount], id: \.self) { emoji in
-                        CardView(content: emoji)
+                    ForEach(viewModel.cards) { card in
+                        CardView(card: card)
                             .aspectRatio(2/3, contentMode: .fit)
+                            .onTapGesture {
+                                //The action of choosing is given to the card.
+                                viewModel.choose(card)
+                            }
                     }
                 }//LazyVGrid
             }//ScrollView
             
-        }//VStack
+        
         .padding(.horizontal)
         .foregroundColor(.red)
     }//Body
@@ -36,32 +40,29 @@ struct ContentView: View {
 
 //The main structure of a chart is created
 struct CardView: View {
-    var content: String
-    @State var isFaceUp: Bool = true
+    let card: MemoryGame<String>.Card
     var body: some View {
         ZStack {
             let shape = RoundedRectangle(cornerRadius: 20)
             //Validates the status of the letter - Open/Closed
             //According to the validation is the view shown (Open or closed)
-            if isFaceUp {
+            if card.isFaceUp {
                 shape
                     .fill()
                     .foregroundColor(.white)
                 shape
                     .strokeBorder(lineWidth: 3)
-                Text(content)
+                Text(card.content)
                     .font(.largeTitle)
+            } else if card.isMatched { //If the cards match, they disappear from the board.
+                shape.opacity(0)
             } else {
                 shape.fill()
             }
             
         }//ZStack
-        //The function to be used when a letter is opened has been added.
-        .onTapGesture {
-            isFaceUp = !isFaceUp
-        }
     }
-}
+}//CardView
 
 
 
@@ -80,6 +81,8 @@ struct CardView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        //The constant is created to update the previews
+        let game = EmojiMemoryGame()
+        ContentView(viewModel: game)
     }
 }
