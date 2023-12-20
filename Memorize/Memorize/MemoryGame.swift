@@ -11,11 +11,21 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     //It will be the deck of the game
     private(set) var cards: Array<Card>
     
-    private var indexOfTheOneAndOnlyFaceUpCard: Int?
+    private var indexOfTheOneAndOnlyFaceUpCard: Int? {
+        get {
+            //The filter function is used to find the first card isFaceUp = true
+            //Extension created to return to oneAndOnly Card
+            cards.indices.filter({ cards[$0].isFaceUp }).oneAndOnly
+        }//Get
+        set {
+            //Cards are turned over when arent the same as a card already opened
+            cards.indices.forEach { cards[$0].isFaceUp = ($0 == newValue) }
+        }//Set
+    }//indexOfTheOneAndOnlyFaceUpCard
     
     //createCardContent - Creates a closure, determines the content of the card.
     init(numberOfPairsOfCards: Int, createCardContent: (Int) -> CardContent ) {
-        cards = Array<Card>()
+        cards = []
         //Add numberOfPairsOfCards x 2 cards to cards Array
         for pairIndex in 0..<numberOfPairsOfCards {
             let content = createCardContent(pairIndex)
@@ -29,7 +39,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     mutating func choose(_ card: Card) {
         //Search for the chosen card in deck
         //Validate that it's not face up and has no match
-        if let chosenIndex = cards.firstIndex(where: {$0.id == card.id}),
+        if let chosenIndex = cards.firstIndex(where: { $0.id == card.id }),
            !cards[chosenIndex].isFaceUp,
            !cards[chosenIndex].isMatched
         {   //if it is a second card, it becomes a potential match
@@ -39,18 +49,11 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
                     cards[chosenIndex].isMatched = true
                     cards[potentialMatchIndex].isMatched = true
                 }
-                //The card is restarted
-                indexOfTheOneAndOnlyFaceUpCard = nil
+                cards[chosenIndex].isFaceUp = true
             } else {
-                //Cards are turned over again
-                for index in cards.indices {
-                    cards[index].isFaceUp = false
-                }
                 //If it is the first card, it is stored in indexOfTheOneAndOnlyFaceUpCard
                 indexOfTheOneAndOnlyFaceUpCard = chosenIndex
             }
-            //The chosen card is turned over
-            cards[chosenIndex].isFaceUp.toggle()
         }
     }//Func
     
@@ -60,12 +63,34 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     //The identifiable protocol is used to ensure which card is being played
     struct Card: Identifiable{
         
-        var isFaceUp: Bool = false //To find out if the letter was flipped
-        var isMatched: Bool = false //To find out if the letter has found its pair
-        var content: CardContent //CardContent - a "Don't care" type (Note below)
-        var id: Int
+        var isFaceUp = true //To find out if the letter was flipped
+        var isMatched = false //To find out if the letter has found its pair
+        let content: CardContent //CardContent - a "Don't care" type (Note below)
+        let id: Int
     }
 }
+
+
+//Returns the only value in an array
+//In the game: Return the card that is face up.
+extension Array {
+    var oneAndOnly: Element? {
+        if count == 1 {
+            return first
+        } else {
+            return nil
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
 
 /*
  CardContent type does not exist
