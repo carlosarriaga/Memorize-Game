@@ -35,3 +35,10 @@ SwiftUI iOS app development necessitates the MVVM architecture. This lecture int
 Swift's enumeration semantics offer powerful features, allowing data storage in matching cases, creation of helper methods directly within the enumeration, pattern-matching in switch statements, and more. Many Swift libraries use the Optional enumeration, benefiting from Swift's syntax for handling Optionals. Optionals also play a role in graceful error-handling when an operation may or may not successfully return a desired value. These concepts are directly demonstrated in the final presentation of Memorize, summarizing the key features of Memorize in its functional state.
 
 [Youtube - Lecture 4](https://www.youtube.com/watch?v=oWZOFSYS5GE)
+
+
+### Lecture 5: Properties Layout @ViewBuilder
+
+Video 5 of the SwiftUI development lecture series at Stanford (Spring 2021) redefines the use cases for @State, emphasizing its memory usage. The lecture expands on the concept of properties, covering computed properties and property observers. The architecture for laying out Views on screen is discussed, including combiner Views and tools like GeometryReader, overlay, and background. The @ViewBuilder directive is introduced for syntactical support in building lists of Views. Demonstrations in the Memorize game showcase automatic sizing of emoji font to fit available space. The lecture also highlights tightened access control on internal APIs in Memorize and demonstrates XCode features like rename and fold.
+
+[Youtube - Lecture 5](https://www.youtube.com/watch?v=ayQl_F_uMS4&t=1s)
