@@ -14,24 +14,21 @@ struct EmojiMemoryGameView: View {
     
     var body: some View {
         
-            
-            ScrollView{
-                //LazyVGrid - creates a grid that loads cells efficiently,
-                //improving performance when displaying large data sets.
-                LazyVGrid(columns: [GridItem(.adaptive(minimum: 70))]){
-                    //The cards are loaded and their respective emoji is assigned.
-                    ForEach(game.cards) { card in
-                        CardView(card: card)
-                            .aspectRatio(2/3, contentMode: .fit)
-                            .onTapGesture {
-                                //The action of choosing is given to the card.
-                                game.choose(card)
-                            }
-                    }
-                }//LazyVGrid
-            }//ScrollView
-            
         
+        AspectVGrid(items: game.cards, aspectRatio: 2/3) { card in
+            if card.isMatched && !card.isFaceUp {
+                Rectangle().opacity(0)
+            } else {
+                CardView(card: card)
+                    .padding(4)
+                    .onTapGesture {
+                        //The action of choosing is given to the card.
+                        game.choose(card)
+                    }
+            }
+        }//AspectVGrid
+                    
+
         .padding(.horizontal)
         .foregroundColor(.red)
     }//Body
@@ -61,6 +58,8 @@ struct CardView: View {
                         .foregroundColor(.white)
                     shape
                         .strokeBorder(lineWidth: DrawingConstants.lineWidth)
+                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                        .padding(5).opacity(0.5)
                     Text(card.content)
                         .font(font(in: geometry.size))
                 } else if card.isMatched { //If the cards match, they disappear from the board.
@@ -86,9 +85,9 @@ struct CardView: View {
     
     //The values of constants are added together
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 20
+        static let cornerRadius: CGFloat = 10
         static let lineWidth: CGFloat = 3
-        static let fontScale: CGFloat = 0.8
+        static let fontScale: CGFloat = 0.75
     }
     
 }//CardView
@@ -112,6 +111,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         //The constant is created to update the previews
         let game = EmojiMemoryGame()
-        EmojiMemoryGameView(game: game)
+        game.choose(game.cards.first!)
+        return EmojiMemoryGameView(game: game)
     }
 }

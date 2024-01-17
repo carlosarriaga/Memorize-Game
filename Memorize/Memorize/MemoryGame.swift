@@ -63,7 +63,7 @@ struct MemoryGame<CardContent> where CardContent: Equatable{
     //The identifiable protocol is used to ensure which card is being played
     struct Card: Identifiable{
         
-        var isFaceUp = true //To find out if the letter was flipped
+        var isFaceUp = false //To find out if the letter was flipped
         var isMatched = false //To find out if the letter has found its pair
         let content: CardContent //CardContent - a "Don't care" type (Note below)
         let id: Int

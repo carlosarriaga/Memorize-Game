@@ -26,7 +26,7 @@ class EmojiMemoryGame: ObservableObject {
     //The deck to be played is created
      private static func createMemoryGame() -> MemoryGame<String> {
         //The closing of MemoryGame.init appears here
-        MemoryGame<String>(numberOfPairsOfCards: 4) { pairIndex in //pairIndex comes from MemoryGame.init
+        MemoryGame<String>(numberOfPairsOfCards: 5) { pairIndex in //pairIndex comes from MemoryGame.init
             emojis[pairIndex] //return the emoji for the card in turn
         }
     }
