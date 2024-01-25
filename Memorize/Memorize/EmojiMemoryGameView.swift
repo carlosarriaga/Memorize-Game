@@ -49,35 +49,23 @@ struct CardView: View {
     var body: some View {
         GeometryReader { geometry in
             ZStack {
-                let shape = RoundedRectangle(cornerRadius: DrawingConstants.cornerRadius)
-                //Validates the status of the letter - Open/Closed
-                //According to the validation is the view shown (Open or closed)
-                if card.isFaceUp {
-                    shape
-                        .fill()
-                        .foregroundColor(.white)
-                    shape
-                        .strokeBorder(lineWidth: DrawingConstants.lineWidth)
-                    Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
-                        .padding(5).opacity(0.5)
-                    Text(card.content)
-                        .font(font(in: geometry.size))
-                } else if card.isMatched { //If the cards match, they disappear from the board.
-                    shape.opacity(0)
-                } else {
-                    shape.fill()
-                }
+                Pie(startAngle: Angle(degrees: 0-90), endAngle: Angle(degrees: 110-90))
+                    .padding(5).opacity(0.5)
+                Text(card.content)
+                    .rotationEffect(Angle.degrees(card.isMatched ? 360 : 0))
+                    .animation(Animation.linear(duration: 1).repeatForever(autoreverses: false))
+                    .font(Font.system(size: DrawingConstants.fontSize))
+                    .scaleEffect(scale(thatFits: geometry.size))
             }//ZStack
+            .cardify(isFaceUp: card.isFaceUp)//A the form Pie and the content (emoji) is applied to the card form
         } //GeometryReader
     }//Body
     
     
     
     
-    //Calculate the size of emoji size regardless of card size
-    //Makes the declarative area cleaner
-    private func font(in size: CGSize) -> Font {
-        Font.system(size: min(size.width, size.height) * DrawingConstants.fontScale)
+    private func scale(thatFits size: CGSize) -> CGFloat {
+        min(size.width, size.height) / (DrawingConstants.fontSize / DrawingConstants.fontScale)
     }
     
     
@@ -85,9 +73,8 @@ struct CardView: View {
     
     //The values of constants are added together
     private struct DrawingConstants {
-        static let cornerRadius: CGFloat = 10
-        static let lineWidth: CGFloat = 3
         static let fontScale: CGFloat = 0.75
+        static let fontSize: CGFloat = 32
     }
     
 }//CardView
@@ -111,7 +98,7 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         //The constant is created to update the previews
         let game = EmojiMemoryGame()
-        game.choose(game.cards.first!)
+//        game.choose(game.cards.first!)
         return EmojiMemoryGameView(game: game)
     }
 }
