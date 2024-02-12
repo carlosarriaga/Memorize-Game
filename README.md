@@ -42,3 +42,25 @@ Swift's enumeration semantics offer powerful features, allowing data storage in 
 Video 5 of the SwiftUI development lecture series at Stanford (Spring 2021) redefines the use cases for @State, emphasizing its memory usage. The lecture expands on the concept of properties, covering computed properties and property observers. The architecture for laying out Views on screen is discussed, including combiner Views and tools like GeometryReader, overlay, and background. The @ViewBuilder directive is introduced for syntactical support in building lists of Views. Demonstrations in the Memorize game showcase automatic sizing of emoji font to fit available space. The lecture also highlights tightened access control on internal APIs in Memorize and demonstrates XCode features like rename and fold.
 
 [Youtube - Lecture 5](https://www.youtube.com/watch?v=ayQl_F_uMS4&t=1s)
+
+
+### Lecture 6: Protocols Shapes
+
+Lecture 6 of Stanford’s CS193p SwiftUI development course given during the Spring of 2021 finished off the discussion of the Swift Type System with an explanation of perhaps the most important kind of type in Swift: protocols. We touch on a number of protocol concepts, including a "constrains and gains" conceptualization of protocol extensions, the use of generics and protocols together, and protocol inheritance. After combining the concepts of protocols and generics in the Memorize game to size the cards to fit the available space on screen by creating an AspectVGrid, the lecture moves on to the topic of drawing arbitrary shapes using the Shape protocol. We take a look back at previously employed modifiers to Shape like .fill() which we can now more deeply understand through our studies of generics and protocols.  We conclude this lecture by enhancing our Memory game to draw the pie-shaped countdown timer, using a custom Shape and ViewBuilder, which will be animated in the next lecture.
+
+[Youtube - Lecture 6](https://www.youtube.com/watch?v=Og9gXZpbKWo)
+
+
+### Lecture 7: ViewModifier Animation
+
+Lecture 7 of Stanford’s CS193p iOS Development course from Spring of 2021 begins with an explanation of ViewModifier, including a demonstration of how to create a custom Cardify ViewModifier for the Memorize game. The lecture then transitions into an in-depth look at animation, covering topics such as implicit vs. explicit animations, Animation structs, transitions, matched geometry effects, the impact of container views, Shape animations, animating ViewModifiers and more. We begin the first part of a two-lecture-long demo by illustrating how to use implicit animation to spin an emoji when a card is successfully matched in our Memorize game. Throughout this process, we constantly refer back to some golden rules of animation, and demonstrate how to use them to diagnose problems when our animations fail to behave as we expect.
+
+[Youtube - Lecture 6](https://www.youtube.com/watch?v=PoeaUMGAx6c)
+
+
+### Lecture 8: Animation Demonstration
+
+After having learned all about animation in the previous lecture, video 8 of Stanford’s CS193p iOS Development course from Spring 2021 is entirely comprised of demonstrations showing how to use animation to enhance our Memorize game.  We learn how to animate the appearance (dealing out) of the cards using matchedGeometryEffect, the flipping of the cards using AnimatableModifier, the shuffling and choosing of the cards using explicit animation, and the counting down of bonus time on a card by animating the pie Shape from a previous lecture. We also discuss how to delay animations and use @State with animation.
+
+[Youtube - Lecture 6](https://www.youtube.com/watch?v=-N1UR7Y105g)
+
