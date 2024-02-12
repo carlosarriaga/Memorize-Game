@@ -63,10 +63,10 @@
 			children = (
 				B35A0DE02B23DCCD00E04158 /* MemorizeApp.swift */,
 				B36EBC6B2B2A52AA0079A7FB /* MemoryGame.swift */,
-				B39EBD392B5F28A40095B850 /* Cardify.swift */,
 				B36EBC6D2B2A56760079A7FB /* EmojiMemoryGame.swift */,
 				B35A0DE22B23DCCD00E04158 /* EmojiMemoryGameView.swift */,
 				B38B8B7B2B477BC800975062 /* AspectVGrid.swift */,
+				B39EBD392B5F28A40095B850 /* Cardify.swift */,
 				B362F3C72B583AEB00951361 /* Pie.swift */,
 				B35A0DE42B23DCCF00E04158 /* Assets.xcassets */,
 				B35A0DE62B23DCCF00E04158 /* Preview Content */,

@@ -14,6 +14,17 @@ struct Pie: Shape {
     var endAngle: Angle
     var clockwise: Bool = false
     
+    // AnimatableData is created to use the start and end angles in the animation.
+    var animatableData: AnimatablePair<Double, Double> {
+        get {
+            AnimatablePair(startAngle.radians, endAngle.radians)
+        }
+        set {
+            startAngle = Angle.radians(newValue.first)
+            endAngle = Angle.radians(newValue.second)
+        }
+    }
+    
     //Shape protocol implementation
     func path(in rect: CGRect) -> Path {
         
